@@ -1,18 +1,13 @@
-﻿Console.BackgroundColor = ConsoleColor.Gray;
+﻿Console.Clear();
+Console.BackgroundColor = ConsoleColor.Gray;
 Console.ForegroundColor = ConsoleColor.DarkGray;
-
 Console.WriteLine("      a     b     c     d     e     f     g     h   ");
 Console.BackgroundColor = ConsoleColor.Black;
-
-int temp = 0;
 int tempColour = 0;
 int number = 8;
-
 ConsoleColor color = ConsoleColor.White;
 int tempcol = 0;
-
-while (true)
-{
+for(int s=0; s< 33;s++) { 
    if(tempColour == 0)
     {
         Console.BackgroundColor = ConsoleColor.Gray;
@@ -24,44 +19,31 @@ while (true)
         tempColour  ++;
         Console.BackgroundColor = ConsoleColor.Black;
     }
-    else if(tempColour == 1||tempColour ==3)
+    else 
     {
         Console.BackgroundColor = ConsoleColor.Gray;
-        Console.Write("   ");
-        for(int j   = 0;j<8;j++)
+        if(tempColour==2){
+            Console.Write(number + "  ");
+            number--;
+        }
+        else
+        {
+            Console.Write("   ");
+        }
+        for(int j  = 0;j<8;j++)
         {
             Console.Write("0");
             Console.BackgroundColor = color;
-            for (int i = 0; i < 5; i++)
-            {
-                Console.Write(" ");
-            }
+            Console.Write("     ");
             Console.BackgroundColor = ConsoleColor.Gray;
-            if (tempcol == 0)
-            {
-                color = ConsoleColor.Black;
-                tempcol = 1;
-            }
-            else
-            {
-                color = ConsoleColor.White;
-                tempcol = 0;
-            }
+            color = (tempcol == 0) ?  ConsoleColor.Black : ConsoleColor.White;
+            tempcol = (tempcol == 0) ? 1 : 0;
         }     
         Console.Write("0");
         if(tempColour == 3)
         {
-            if (tempcol == 0)
-            {
-                color = ConsoleColor.Black;
-                tempcol = 1;
-            }
-            else
-            {
-                color = ConsoleColor.White;
-                tempcol = 0;
-
-            }
+            color = (tempcol == 0) ? ConsoleColor.Black : ConsoleColor.White;
+            tempcol = (tempcol == 0) ? 1 : 0;
             tempColour = 0;
         }
         else
@@ -70,44 +52,6 @@ while (true)
         }
         Console.BackgroundColor = ConsoleColor.Black;
     }
-    else if (tempColour == 2)
-    {
-        Console.BackgroundColor = ConsoleColor.Gray;
-        Console.Write(number+"  ");
-        for (int j = 0; j < 8; j++)
-        {
-            Console.Write("0");
-            Console.BackgroundColor = color;
-            for (int i = 0; i < 5; i++)
-            {
-                Console.Write(" ");
-            }
-            Console.BackgroundColor = ConsoleColor.Gray;
-            if (tempcol == 0)
-            {
-                color = ConsoleColor.Black;
-                tempcol = 1;
-            }
-            else
-            {
-                color = ConsoleColor.White;
-                tempcol = 0;
-
-            }
-        }
-        Console.Write("0");
-
-        number--;
-        tempColour  ++;
-        Console.BackgroundColor = ConsoleColor.Black;
-
-    }
-    if (temp == 32) {
-        Console.ForegroundColor = ConsoleColor.White;
-
-        break;
-    }
-    Console.WriteLine("");
-
-    temp++;
+    Console.WriteLine(""); 
 }
+Console.ForegroundColor = ConsoleColor.White;
