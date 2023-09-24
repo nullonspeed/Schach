@@ -23,167 +23,32 @@ while (true)
         }
         tempColour  ++;
         Console.BackgroundColor = ConsoleColor.Black;
-
     }
     else if(tempColour == 1||tempColour ==3)
     {
         Console.BackgroundColor = ConsoleColor.Gray;
-
         Console.Write("   ");
+        for(int j   = 0;j<8;j++)
+        {
+            Console.Write("0");
+            Console.BackgroundColor = color;
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write(" ");
+            }
+            Console.BackgroundColor = ConsoleColor.Gray;
+            if (tempcol == 0)
+            {
+                color = ConsoleColor.Black;
+                tempcol = 1;
+            }
+            else
+            {
+                color = ConsoleColor.White;
+                tempcol = 0;
+            }
+        }     
         Console.Write("0");
-        Console.BackgroundColor = color;
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-       
-
         if(tempColour == 3)
         {
             if (tempcol == 0)
@@ -202,167 +67,33 @@ while (true)
         else
         {
             tempColour++;
-
         }
         Console.BackgroundColor = ConsoleColor.Black;
-
-
     }
     else if (tempColour == 2)
     {
         Console.BackgroundColor = ConsoleColor.Gray;
-
         Console.Write(number+"  ");
-        Console.Write("0");
-        Console.BackgroundColor = color;
-        for (int i = 0; i < 5; i++)
+        for (int j = 0; j < 8; j++)
         {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
+            Console.Write("0");
+            Console.BackgroundColor = color;
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write(" ");
+            }
+            Console.BackgroundColor = ConsoleColor.Gray;
+            if (tempcol == 0)
+            {
+                color = ConsoleColor.Black;
+                tempcol = 1;
+            }
+            else
+            {
+                color = ConsoleColor.White;
+                tempcol = 0;
 
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
-        }
-        Console.Write("0");
-        Console.BackgroundColor = color;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(" ");
-        }
-        Console.BackgroundColor = ConsoleColor.Gray;
-        if (tempcol == 0)
-        {
-            color = ConsoleColor.Black;
-            tempcol = 1;
-        }
-        else
-        {
-            color = ConsoleColor.White;
-            tempcol = 0;
-
+            }
         }
         Console.Write("0");
 
@@ -371,9 +102,6 @@ while (true)
         Console.BackgroundColor = ConsoleColor.Black;
 
     }
-
-
-
     if (temp == 32) {
         Console.ForegroundColor = ConsoleColor.White;
 
@@ -383,4 +111,3 @@ while (true)
 
     temp++;
 }
-
