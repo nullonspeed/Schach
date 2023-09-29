@@ -1,42 +1,42 @@
-﻿using Schach;
+﻿using Chess;
 
-Spielfeld spielfeld = new Spielfeld();
+ChessBord chessBoard = new ChessBord();
 
 
 Console.SetWindowSize(80, 40);
 bool end = false;
-spielfeld.GeneratePieces();
+chessBoard.GeneratePieces();
 bool whitesTurn=true;
 
 while (!end)
 {
-    if (spielfeld.Spielfiguren.Find(d=>d.ToString() == "w K")==null)
+    if (chessBoard.chessPieces.Find(d=>d.ToString() == "w K")==null)
     {
         Console.Clear();
-        Console.WriteLine("Schwarz hat gewonnen");
+        Console.WriteLine("Black won");
         Console.ReadLine();
         break;
     }
-    if (spielfeld.Spielfiguren.Find(d => d.ToString() == "s K") == null)
+    if (chessBoard.chessPieces.Find(d => d.ToString() == "b K") == null)
     {
         Console.Clear();
-        Console.WriteLine("Weiß hat gewonnen");
+        Console.WriteLine("White won");
         Console.ReadLine();
         break;
     }
     Console.Clear();
-    spielfeld.DrawPlainField();
-    spielfeld.drawFigures();
+    chessBoard.DrawPlainField();
+    chessBoard.drawFigures();
     Console.SetCursorPosition(0, 35);
 
     if(whitesTurn){
         Console.WriteLine("White:");
-        Console.WriteLine("Geben sie ihren zug ein:");
+        Console.WriteLine("Please make your turn:");
 
     }
     else {
-        Console.WriteLine("Schwarz:");
-        Console.WriteLine("Geben sie ihren zug ein:");
+        Console.WriteLine("Black:");
+        Console.WriteLine("Please make your turn:");
     }
     string Turn = Console.ReadLine();
     if (Turn.ToLower().Equals(("end")))
@@ -46,7 +46,7 @@ while (!end)
     }
 
 
-    bool movePossible = spielfeld.MoveChessPiece(Turn, whitesTurn);
+    bool movePossible = chessBoard.MoveChessPiece(Turn, whitesTurn);
     if (!movePossible)
     {
 

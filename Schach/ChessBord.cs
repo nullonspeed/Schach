@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Schach
+namespace Chess
 {
-     class Spielfeld
+     class ChessBord
     {
-        public List<Spielfigur> Spielfiguren { get; set; }= new List<Spielfigur>();
+        public List<Piece> chessPieces { get; set; }= new List<Piece>();
         public void DrawPlainField()
         {
 
@@ -17,13 +17,13 @@ namespace Schach
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("      a     b     c     d     e     f     g     h   ");
             Console.BackgroundColor = ConsoleColor.Black;
-            int tempColour = 0;
-            int number = 8;
+            int counterForRows = 0;
+            int counterForRowNumbers = 8;
             ConsoleColor color = ConsoleColor.White;
-            int tempcol = 0;
+            int counterForColourChange = 0;
             for (int s = 0; s < 33; s++)
             {
-                if (tempColour == 0)
+                if (counterForRows == 0)
                 {
                     Console.BackgroundColor = ConsoleColor.Gray;
                     Console.Write("   ");
@@ -31,16 +31,16 @@ namespace Schach
                     {
                         Console.Write("0");
                     }
-                    tempColour++;
+                    counterForRows++;
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
                 else
                 {
                     Console.BackgroundColor = ConsoleColor.Gray;
-                    if (tempColour == 2)
+                    if (counterForRows == 2)
                     {
-                        Console.Write(number + "  ");
-                        number--;
+                        Console.Write(counterForRowNumbers + "  ");
+                        counterForRowNumbers--;
                     }
                     else
                     {
@@ -52,19 +52,19 @@ namespace Schach
                         Console.BackgroundColor = color;
                         Console.Write("     ");
                         Console.BackgroundColor = ConsoleColor.Gray;
-                        color = (tempcol == 0) ? ConsoleColor.Black : ConsoleColor.White;
-                        tempcol = (tempcol == 0) ? 1 : 0;
+                        color = (counterForColourChange == 0) ? ConsoleColor.Black : ConsoleColor.White;
+                        counterForColourChange = (counterForColourChange == 0) ? 1 : 0;
                     }
                     Console.Write("0");
-                    if (tempColour == 3)
+                    if (counterForRows == 3)
                     {
-                        color = (tempcol == 0) ? ConsoleColor.Black : ConsoleColor.White;
-                        tempcol = (tempcol == 0) ? 1 : 0;
-                        tempColour = 0;
+                        color = (counterForColourChange == 0) ? ConsoleColor.Black : ConsoleColor.White;
+                        counterForColourChange = (counterForColourChange == 0) ? 1 : 0;
+                        counterForRows = 0;
                     }
                     else
                     {
-                        tempColour++;
+                        counterForRows++;
                     }
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
@@ -76,9 +76,9 @@ namespace Schach
         {
            
 
-            foreach (Spielfigur sp in Spielfiguren)
+            foreach (Piece sp in chessPieces)
             {
-                char[] a = sp.place.ToCharArray();
+                char[] a = sp.currentPosition.ToCharArray();
 
                 Position pos = getPosition(a[0].ToString(), a[1].ToString());
                 Console.SetCursorPosition(pos.letter, pos.number);
@@ -150,25 +150,25 @@ namespace Schach
                     tempn = tempn + 32;
                     break;
                 default:
-                    Console.WriteLine("Wrong Letter" + letter);
+                    Console.WriteLine("Wrong Number" + number);
                     break;
             }
 
             return new Position { letter = temp, number = tempn };
         }
-       public Spielfigur getFigure(String Turn, List<Spielfigur> pieces)
+       public Piece getFigure(String Turn, List<Piece> pieces)
         {
-            char[] turns = Turn.ToCharArray();
-            string figure = turns[0].ToString() + turns[1].ToString();
-            Spielfigur figur = pieces.Find(i => i.place.ToLower().Equals(figure.ToLower()));
+            char[] destinationChar = Turn.ToCharArray();
+            string destinationPositionString = destinationChar[0].ToString() + destinationChar[1].ToString();
+            Piece piece = pieces.Find(i => i.currentPosition.ToLower().Equals(destinationPositionString.ToLower()));
 
-            return figur;
+            return piece;
         }
         public bool MoveChessPiece(string Turn, bool whitesTurn)
         {
-            Zug turn = new Zug();
-            bool correctTurn = turn.CheckTurn(Turn);
-            if (!correctTurn)
+            Turn currentTurn = new Turn();
+            bool isTurnCorrect = currentTurn.CheckTurn(Turn);
+            if (!isTurnCorrect)
             {
                
                 return false;
@@ -176,28 +176,28 @@ namespace Schach
 
 
 
-            Spielfigur current = getFigure(Turn, Spielfiguren);
-            if (current == null)
+            Piece currentPiece = getFigure(Turn, chessPieces);
+            if (currentPiece == null)
             {
-                Console.WriteLine("an dieser Stelle steht keine Spielfigur, bitte erneut eingeben");
+                Console.WriteLine("no Piece on this Position, Please write a new input");
                 Console.ReadLine();
                 return false;
             }
-            if (whitesTurn != current.isWhite)
+            if (whitesTurn != currentPiece.isWhite)
             {
-                Console.WriteLine("Spielfigur vom Falschen team ausgewählt bitte erneut eingeben, bitte erneut eingeben");
+                Console.WriteLine("The Piece is part of the opponent team, Please write a new input");
                 Console.ReadLine();
                 return false;
             }
 
 
-            string zug = Turn[3].ToString() + Turn[4].ToString();
-            bool canMove = current.CanMove(zug);
+            string targetDestination = Turn[3].ToString() + Turn[4].ToString();
+            bool canMove = currentPiece.CanMove(targetDestination);
             if (!canMove)
             {
                 return false;
             }
-            canMove = current.CanMoveToTargetPosition(zug, Spielfiguren);
+            canMove = currentPiece.CanMoveToTargetPosition(targetDestination, chessPieces);
             if (!canMove)
             {
 
@@ -205,19 +205,19 @@ namespace Schach
             }
             else
             {
-                Spielfigur toDeletePiece = Spielfiguren.Find(d => d.place == zug);
-                if (toDeletePiece != null && toDeletePiece.isWhite != whitesTurn)
+                Piece possiblePieceToCapture = chessPieces.Find(d => d.currentPosition == targetDestination);
+                if (possiblePieceToCapture != null && possiblePieceToCapture.isWhite != whitesTurn)
                 {
-                    Spielfiguren.Remove(toDeletePiece);
+                    chessPieces.Remove(possiblePieceToCapture);
                 }
-                else if (toDeletePiece != null && toDeletePiece.isWhite == whitesTurn)
+                else if (possiblePieceToCapture != null && possiblePieceToCapture.isWhite == whitesTurn)
                 {
-                    Console.WriteLine("mann kann keine eigenen Figuren schmeißen, bitte erneut eingeben");
+                    Console.WriteLine("you cant capture your own pieces, Please write a new input");
                     Console.ReadLine();
                     return false;
                 }
 
-                Spielfiguren.Find(d => d.place == current.place).place = zug;
+                chessPieces.Find(d => d.currentPosition == currentPiece.currentPosition).currentPosition = targetDestination;
             }
             return true;
         }
@@ -226,37 +226,37 @@ namespace Schach
         {
             int place;
             int placeBauer;
-            string koenig;
-            string dame;
+            string king;
+            string queen;
 
 
-            for (int farbe = 0; farbe < 2; farbe++)
+            for (int colour = 0; colour < 2; colour++)
             {
 
-                place = (farbe == 0) ? 1 : 8;
-                placeBauer = (farbe == 0) ? 2 : 7;
-                dame = (farbe == 0) ? "d" : "e";
-                koenig = (farbe == 0) ? "e" : "d";
+                place = (colour == 0) ? 1 : 8;
+                placeBauer = (colour == 0) ? 2 : 7;
+                queen = (colour == 0) ? "d" : "e";
+                king = (colour == 0) ? "e" : "d";
 
 
 
-                Spielfiguren.Add(new Bauer { isWhite = farbe == 0, place = $"a{placeBauer}" });
-                Spielfiguren.Add(new Bauer { isWhite = farbe == 0, place = $"b{placeBauer}" });
-                Spielfiguren.Add(new Bauer { isWhite = farbe == 0, place = $"c{placeBauer}" });
-                Spielfiguren.Add(new Bauer { isWhite = farbe == 0, place = $"d{placeBauer}" });
-                Spielfiguren.Add(new Bauer { isWhite = farbe == 0, place = $"e{placeBauer}" });
-                Spielfiguren.Add(new Bauer { isWhite = farbe == 0, place = $"f{placeBauer}" });
-                Spielfiguren.Add(new Bauer { isWhite = farbe == 0, place = $"g{placeBauer}" });
-                Spielfiguren.Add(new Bauer { isWhite = farbe == 0, place = $"h{placeBauer}" });
+                chessPieces.Add(new Pawn { isWhite = colour == 0, currentPosition = $"a{placeBauer}" });
+                chessPieces.Add(new Pawn { isWhite = colour == 0, currentPosition = $"b{placeBauer}" });
+                chessPieces.Add(new Pawn { isWhite = colour == 0, currentPosition = $"c{placeBauer}" });
+                chessPieces.Add(new Pawn { isWhite = colour == 0, currentPosition = $"d{placeBauer}" });
+                chessPieces.Add(new Pawn { isWhite = colour == 0, currentPosition = $"e{placeBauer}" });
+                chessPieces.Add(new Pawn { isWhite = colour == 0, currentPosition = $"f{placeBauer}" });
+                chessPieces.Add(new Pawn { isWhite = colour == 0, currentPosition = $"g{placeBauer}" });
+                chessPieces.Add(new Pawn { isWhite = colour == 0, currentPosition = $"h{placeBauer}" });
 
-                Spielfiguren.Add(new Dame       { isWhite = farbe == 0, place = $"{dame}{place}" });
-                Spielfiguren.Add(new Koenig     { isWhite = farbe == 0, place = $"{koenig}{place}" });
-                Spielfiguren.Add(new Laeufer    { isWhite = farbe == 0, place = $"c{place}" });
-                Spielfiguren.Add(new Laeufer    { isWhite = farbe == 0, place = $"f{place}" });
-                Spielfiguren.Add(new Springer   { isWhite = farbe == 0, place = $"b{place}" });
-                Spielfiguren.Add(new Springer   { isWhite = farbe == 0, place = $"g{place}" });
-                Spielfiguren.Add(new Turm       { isWhite = farbe == 0, place = $"a{place}" });
-                Spielfiguren.Add(new Turm       { isWhite = farbe == 0, place = $"h{place}" });
+                chessPieces.Add(new Queen       { isWhite = colour == 0, currentPosition = $"{queen}{place}" });
+                chessPieces.Add(new King     { isWhite = colour == 0, currentPosition = $"{king}{place}" });
+                chessPieces.Add(new Bishop    { isWhite = colour == 0, currentPosition = $"c{place}" });
+                chessPieces.Add(new Bishop    { isWhite = colour == 0, currentPosition = $"f{place}" });
+                chessPieces.Add(new Knight   { isWhite = colour == 0, currentPosition = $"b{place}" });
+                chessPieces.Add(new Knight   { isWhite = colour == 0, currentPosition = $"g{place}" });
+                chessPieces.Add(new Rook       { isWhite = colour == 0, currentPosition = $"a{place}" });
+                chessPieces.Add(new Rook       { isWhite = colour == 0, currentPosition = $"h{place}" });
 
 
 

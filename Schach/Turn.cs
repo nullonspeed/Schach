@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Schach
+namespace Chess
 {
-    internal class Zug
+    internal class Turn
     {
 
         public bool CheckTurn(string turnString)
@@ -23,7 +23,7 @@ namespace Schach
                     }
                     else
                     {
-                        Console.WriteLine("Die Eingabe ist nicht im richtigen format, bitte enter drücken und dann erneut eingeben");
+                        Console.WriteLine("your input has the wrong format, please make a new one");
                         Console.ReadLine();
                         return false;
                     }
